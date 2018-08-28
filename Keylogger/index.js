@@ -17,7 +17,6 @@ app.use(cors()); // to support Cross Origin Requests
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-// respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });

