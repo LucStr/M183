@@ -1,0 +1,14 @@
+{
+  "name": "twofactorauthentication",
+  "version": "1.0.0",
+  "description": "This should demonstrate, as to how you can use twofactorauthentication",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "TwoFactorAuthentication"
+  ],
+  "author": "Luca Strebel",
+  "license": "ISC"
+}
