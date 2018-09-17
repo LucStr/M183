@@ -1,7 +1,15 @@
-var speakeasy = require('speakeasy');
+// server lib
 var express = require('express');
+
 var QRCode = require('qrcode');
+var bodyParser = require('body-parser')
+
 var app = express();
+
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 const secret = 'N5NFE4R6MJLGM3LNFQUVIYJIHFHG22KD';
 
@@ -17,8 +25,8 @@ app.get('/check', (req, res) => {
     res.sendFile(__dirname + '/check.html');
 });
 
-app.post('/check', (req, res, username, password, token) => {
-    console.log(username, password, token);
+app.post('/checkp', (req, res) => {
+    //{ username, password, token } = req.body;
     res.send('AHAHAH');
 })
 

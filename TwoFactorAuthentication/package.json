@@ -10,5 +10,10 @@
     "TwoFactorAuthentication"
   ],
   "author": "Luca Strebel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "qrcode": "^1.2.2"
+  }
 }
