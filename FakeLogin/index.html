@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fakelogin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <script>
+        var body = document.querySelector('body');
+        body.innerHTML += `
+        <form id="myform" action="" method="POST">
+            <input name="username" /><br />
+            <input name="password" /><br />
+            <input type="submit" value="log in" />
+        </form>`;
+        var form = document.querySelector('#myform');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let username = document.querySelector('[name=username]').value;
+            let password = document.querySelector('[name=password]').value;
+            console.log({username, password});
+            fetch("localhost:8000/api/fakelogin", {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                },
+                body: `username=${username}&password=${password}`
+            }).then(e => {
+                console.log('Success')
+            }).catch(e => {
+                console.log('ERROR: ', e);
+            })
+        });
+    </script>
+</body>
+
+</html>
