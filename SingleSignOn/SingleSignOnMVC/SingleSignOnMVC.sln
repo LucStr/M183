@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleSignOnMVC", "SingleSignOnMVC\SingleSignOnMVC.csproj", "{CCBCC8C8-246C-4828-88EB-626D2142DB0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCBCC8C8-246C-4828-88EB-626D2142DB0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBCC8C8-246C-4828-88EB-626D2142DB0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBCC8C8-246C-4828-88EB-626D2142DB0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBCC8C8-246C-4828-88EB-626D2142DB0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEBE10C9-DA6A-4D4A-8D7C-DBA5E0C74F69}
+	EndGlobalSection
+EndGlobal
