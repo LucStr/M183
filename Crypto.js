@@ -13,9 +13,10 @@ function vigenere(key, text, decode){
 		return console.log('invalid key');
 	key = key.map(a => a.pos);
 	return text.split('').map(a => a.charCodeAt(0)).map((a, i) => {
-	var base = a < 91 && a >= 65 ? 65 : a >= 97 && a < 123 ? 97 : false;
+	var base = alphabetPosition(a);
 	if(!base)
 		return a;	
+	base = base.base;
 	return base + ((26 + a - base + key[i % key.length] * (decode ? -1 : 1)) % 26)
 }).map(a => String.fromCharCode(a)).join('')
 
