@@ -1,0 +1,39 @@
+M183
+
+Nie sensitive daten in session speichern
+
+Gültigkeitsdauer
+    Session: meistens bis Browser geschlossen wurde
+    Cookie:  nicht begrenzt von der Zeit her
+
+Warenkorb
+    Artikel ID + Anzahl in Cookie speichern - weniger Datensicherheit
+    in DB speichern und cookie hat ID davon
+    ALT: in Link machen
+    Eigene HTTP-Headers - Proprietary HTTP-Headers
+
+Session ID:
+    Keine Vortlaufende Nummern
+    Lang genug
+
+Session Management
+    Permissive: nur Prüfung von Session ID (Schlecht)
+    Strict:     Nur von Anwendung vergeben, niemand anders
+
+    Wie oft neue Session ID
+        Privilege change (Rechte ändern -> ansonsten kann trotzdem z.B. weiterbearbeitet werden)
+    Timeouts (Automatic Expiration)
+    Logouts (Manual Expirations)
+
+Session Properties (max. 4kbytes)
+    Name,
+    Value,
+    Flag (HttpOnly, Secure, etc.)
+    Max 50 cookies per side
+    -> HttpOnly = kann nicht von JS ausgelesen werden
+    Wer nicht über HTTPS zugreift, erstellt gewisse Cookies nicht
+
+
+
+
+

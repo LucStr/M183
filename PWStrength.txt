@@ -1,0 +1,54 @@
+add additional security layer 
+
+    something you know +
+    something you have
+
+One-time-password OTP
+Time-Based One-time-password (totp)
+PIN-to
+ken
+unique-hardware-token
+
+1. user enters credentials
+2. backend-system generates a token
+3. backend-system sends the toekn (email/system)
+4. user enters token and can enter the system
+
+--> sms oder email kann nicht (mehr) verfügbar sein 
+    - Handy vergessen
+    - neue Nummer
+    - etc.
+--> weiterer benötigter dienst
+
+TOTP --> Google Authenticator
+Dienst und Server vereinbaren Key
+-----------------------------------------------------------
+PW Strength
+
+Allowed chars:
+    a-zA-Z0-9 !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+    --> 26 + 26 + 10 + 33 = 95
+
+Exercise 1:
+    1.  95
+    2.  9025
+    3.  857375
+    4.  81450625
+    5.  7737809375
+    10. 59873693923837890625
+        
+
+Exercise 2:
+    1.  95
+    2.  8930
+    3.  830490
+    4.  76405080
+    5.  6952862280
+    10. 36668784925297324800
+
+Exercise 3:
+    a)  ~1897 Jahre bei 1 Milliarde(n)/Sek
+    b)  ~1162 Jhre bei "
+
+Exercise 4:
+    Weil man über Wörterlisten die Lösung suchen kann und das Merken dafür einfacher ist.
