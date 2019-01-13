@@ -1,0 +1,29 @@
+﻿PW Strength
+
+Allowed chars:
+    a-zA-Z0-9 !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+    --> 26 + 26 + 10 + 33 = 95
+
+Exercise 1:
+    1.  95
+    2.  9025
+    3.  857375
+    4.  81450625
+    5.  7737809375
+    10. 59873693923837890625
+        
+
+Exercise 2:
+    1.  95
+    2.  8930
+    3.  830490
+    4.  76405080
+    5.  6952862280
+    10. 36668784925297324800
+
+Exercise 3:
+    a)  ~1897 Jahre bei 1 Milliarde(n)/Sek
+    b)  ~1162 Jahre bei "
+
+Exercise 4:
+    Weil man über Wörterlisten die Lösung suchen kann und das Merken dafür einfacher ist.
