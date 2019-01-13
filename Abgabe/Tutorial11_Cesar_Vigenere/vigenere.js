@@ -1,5 +1,5 @@
 function vigenere(key, text, decode) {
-	key = key.split('').map(a => a.charCodeAt(0)).map(alphabetPosition);
+	key = [...key].map(a => a.charCodeAt(0)).map(alphabetPosition);
 	if (!key.every(a => a))
 		return console.log('invalid key');
 	key = key.map(a => a.pos);
