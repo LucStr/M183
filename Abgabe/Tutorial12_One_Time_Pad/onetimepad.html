@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<body>
+    <script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("analyze_plaintext").addEventListener("click", e => {
+                e.preventDefault();
+                e.stopPropagation();
+                var text = document.getElementById("plaintext").value;
+                var histogram = createHistogramValues(text);
+                document.getElementById("chart_plaintext").innerHTML = createHTMLTable(histogram);
+            });
+            document.getElementById("analyze_ciphertext").addEventListener("click", e => {
+                e.preventDefault();
+                e.stopPropagation();
+                var text = document.getElementById("ciphertext").value;
+                var histogram = createHistogramValues(text);
+                document.getElementById("chart_ciphertext").innerHTML = createHTMLTable(histogram);
+            });
+            document.getElementById("encrypt").addEventListener("click", e => {
+                e.preventDefault();
+                e.stopPropagation();
+                var plaintext = document.getElementById("plaintext").value;
+                var shift = document.getElementById("shift").value;
+                document.getElementById("ciphertext").innerHTML = onetimepad(plaintext, shift);
+            });
+            document.getElementById("decrypt").addEventListener("click", e => {
+                e.preventDefault();
+                e.stopPropagation();
+                var ciphertext = document.getElementById("ciphertext").value;
+                var shift = document.getElementById("backshift").value;
+                document.getElementById("ciphertext").innerHTML = onetimepad(ciphertext, shift, true);
+            });
+        });
+
+        function createHistogramValues(text) {
+            var histogram_prepare = [];
+            for (var i = 0, textLength = text.length; i < textLength; i++) {
+                var letter = text[i];
+                if (letter.match(/[a-z]/i)) {
+                    histogram_prepare[letter] = (histogram_prepare[letter] || 0) + 1;
+                }
+            }
+            histogram = histogram_prepare.sort((a, b) => {
+                a = a[1];
+                b = b[1];
+                return a < b ? -1 : (a > b ? 1 : 0);
+            });
+            return histogram;
+        }
+        
+        function createHTMLTable(histogram) {
+            console.log(histogram);
+            var html = "<table>";
+            for (var key in histogram) {
+                html += `
+                    <tr>
+                        <td>${key}</td>
+                        <td>&nbsp</td>
+                        <td>${histogram[key]}</td>
+                    </tr>`;
+            }
+            html += "</table>";
+            return html;
+        }
+    </script>
+    <script src="onetimepad.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>One-time-pad Cipher</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <legend>Plaintext</legend>
+                <textarea id="plaintext" class="form-control"></textarea><br>
+                <button class="btn btn-primary" id="analyze_plaintext">Analyze Plaintext</button> <br><br>
+                <button class="btn btn-primary" id="encrypt">encrypt</button> using key <input name="shift" id="shift"
+                    value="" type="text" />
+            </div>
+
+            <div class="col-md-6">
+                <br>
+                <legend>Histogram Plaintext</legend>
+                <div id="chart_plaintext"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <legend>Ciphertext</legend>
+                <textarea id="ciphertext" class="form-control"></textarea><br>
+                <button class="btn btn-primary" id="analyze_ciphertext">Analyze Plaintext</button> <br><br>
+                <button class="btn btn-primary" id="decrypt">decrypt</button> using key <input name="backshift"
+                    id="backshift" value="" type="text" />
+            </div>
+
+            <div class="col-md-6">
+                <legend>Histogram Ciphertext</legend>
+                <div id="chart_ciphertext"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

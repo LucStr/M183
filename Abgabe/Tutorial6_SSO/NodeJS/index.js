@@ -21,4 +21,4 @@ app.post('/auth', (req, res) => {
     res.sendStatus(200);
 })
 
-app.listen(PORT, a => console.log(`Listening on Port ${PORT}`));
+app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
