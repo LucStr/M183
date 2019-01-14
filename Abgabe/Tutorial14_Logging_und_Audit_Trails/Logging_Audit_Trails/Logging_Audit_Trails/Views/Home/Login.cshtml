@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div class="row">
+    <form action="./DoLogin" method="post" class="well col-lg-8 col-lg-offset-2" style="margin-top:60px;">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control" />
+
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" />
+
+        <input type="submit" value="Login" class="btn btn-primary" />
+        @ViewBag.Message
+    </form>
+</div>
